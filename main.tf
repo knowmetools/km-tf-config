@@ -17,6 +17,11 @@ resource "aws_s3_bucket" "state_bucket" {
     }
   }
 
+  tags {
+    Application = "terraform"
+    Name        = "Terraform State"
+  }
+
   versioning {
     enabled = true
   }
@@ -31,6 +36,11 @@ resource "aws_dynamodb_table" "terraform_statelock" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+
+  tags {
+    Application = "terraform"
+    Name        = "Terraform Lock"
   }
 }
 
