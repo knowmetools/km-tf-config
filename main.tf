@@ -2,6 +2,7 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
+
 resource "aws_s3_bucket" "state_bucket" {
   acl    = "private"
   bucket = "${var.state_bucket}"
@@ -20,3 +21,16 @@ resource "aws_s3_bucket" "state_bucket" {
     enabled = true
   }
 }
+
+resource "aws_dynamodb_table" "terraform_statelock" {
+  name           = "${var.lock_table}"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+}
+

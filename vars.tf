@@ -4,6 +4,12 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+variable "lock_table" {
+  type = "string"
+  description = "Name of the DynamoDB table used to aquire a lock for running Terraform code."
+  default = "terraformLock"
+}
+
 variable "old_version_expiration" {
   type = "string"
   description = "The number of days that old state files will be kept for."
