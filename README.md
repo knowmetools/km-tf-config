@@ -1,8 +1,23 @@
 # Know Me Terraform Config
 
-**S3 Bucket for Terraform State:** `km-tf-state` in `us-east-1`
-
 This repository contains the files required to set up our Terraform infrastructure.
+
+
+## Usage
+
+This block should be included in any other Terraform code that we run:
+
+```hcl
+terraform {
+  backend "s3" {
+    bucket = "km-tf-state"
+    key    = "<project-name>"
+    region = "us-east-1"
+  }
+}
+```
+
+*Note that `<project-name>` should be unique across all projects that use this bucket.*
 
 
 ## Overview
@@ -10,7 +25,7 @@ This repository contains the files required to set up our Terraform infrastructu
 The main objective of this module is to create an S3 bucket where we can store Terraform state for other projects.
 
 
-## Running the Code
+## Provisioning the Infrastructure
 
 ```shell
 terraform apply
